@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1><%= @restaurant.name %>
+      <p><%= @restaurant.category.name %></p>  
     </div>
     <div class="col-md-4">
       <%= image_tag @restaurant.image, class: "img-responsive center-block" %>
