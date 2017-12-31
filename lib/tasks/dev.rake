@@ -9,8 +9,8 @@ namespace :dev do
         address: FFaker::Address.street_address,
         description: FFaker::Lorem.paragraph,
         category: Category.all.sample
-
       )
+
     end
     puts "have created fake restaurants"
     puts "now you have #{Restaurant.count} restaurants data"
@@ -35,6 +35,7 @@ namespace :dev do
           restaurant.comments.create!(
             content: FFaker::Lorem.sentence,
             user: User.all.sample
+
           )
         end
       end
