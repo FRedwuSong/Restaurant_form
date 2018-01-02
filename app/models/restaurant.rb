@@ -30,5 +30,6 @@ class Restaurant < ApplicationRecord
   def count_favorites
     self.favorites_count = self.favorites.size
     self.save
+    #存進database
   end
 end
