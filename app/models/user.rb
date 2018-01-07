@@ -32,6 +32,11 @@ class User < ApplicationRecord
   has_many :inverse_followships, class_name: "Followship", foreign_key: "following_id"
   has_many :followers, through: :inverse_followships, source: :user
 
+  # 「使用者好友使用者」的 self-referential relationships 設定
+  # 不需要另加 source，Rails 可從 Friendship Model 設定來判斷 friends 指向 User Model
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
+
   # admin? 讓我們用來判斷單個user是否有 admin 角色，列如：current_user.admin?
   def admin?
     self.role == "admin"
