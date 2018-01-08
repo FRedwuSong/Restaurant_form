@@ -37,6 +37,11 @@ class User < ApplicationRecord
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
+  # 「使用者的朋友」的設定
+  # 透過 class_name, foreign_key 的自訂，指向 Friendship 表上的另一側
+  has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :friends, through: :inverse_friendships, source: :user
+
   # admin? 讓我們用來判斷單個user是否有 admin 角色，列如：current_user.admin?
   def admin?
     self.role == "admin"
