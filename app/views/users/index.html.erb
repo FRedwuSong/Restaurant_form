@@ -35,11 +35,16 @@
             <!-- 可先利用 Placeholder 如 <img src="http://via.placeholder.com/128x128"> 產生圖片 -->
             <%=image_tag(src="http://via.placeholder.com/128x128", class: "img-rounded") %>
             <h4><%= user.name %></h4>
-            <%= link_to 'Friend', friendships_path(friend_id: user), method: :post, class: "btn btn-link" %>
-            <!-- 會用 DELETE 動作導向 http://localhost:3000/friendships/{user.id} -->
-           <%= link_to 'cancel', friendship_path(user), method: :delete %>
-
-          <% end %>
+            <% if user != current_user %>
+              <% if current_user.friend?(user) %>
+              <!-- 會用 DELETE 動作導向 http://localhost:3000/followships/{user.id} -->
+                <%= link_to 'cancel', friendship_path(user), method: :delete %>
+              <% else %>
+                <!-- 會用 POST 動作導向 http://localhost:3000/followships?following_id={user.id} -->
+                <%= link_to 'Friend', friendships_path(friend_id: user), method: :post  %>
+              <% end %>
+        <% end %>
+    <% end %>
 
           <%= render partial: "shared/follow", locals: {user: user} %>
 
