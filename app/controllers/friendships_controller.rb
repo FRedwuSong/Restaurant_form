@@ -10,4 +10,13 @@ class FriendshipsController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
+
+  def destroy
+    # where 會回傳物件集合(Array)，需要串接可取出單一物件的方法如 first
+    @friendship = current_user.friendships.where(friend_id: params[:id]).first
+    @friendship.destroy
+    flash[:alert] = "cancel"
+    redirect_back(fallback_location: root_path)
+
+  end
 end
