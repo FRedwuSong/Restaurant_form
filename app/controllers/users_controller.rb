@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show,:edit,:update]
+  before_action :set_user, only: [:show,:edit,:update, :friend_list]
   def show
     # @user = User.find(params[:id])
     @commented_restaurants = @user.restaurants.uniq
@@ -20,6 +20,10 @@ class UsersController < ApplicationController
   end
   def index
     @users = User.all
+  end
+
+  def friend_list
+    @friends = @user.all_friend
   end
 
   private
