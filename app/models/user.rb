@@ -54,4 +54,8 @@ class User < ApplicationRecord
   def friend?(user)
     self.friends.include?(user)
   end
+
+  def all_friend
+    (friends + passive_friends).uniq
+  end  
 end
