@@ -6,9 +6,11 @@ class Admin::RestaurantsController < Admin::BaseController
   def index
     @restaurants = Restaurant.page(params[:page]).per(20)
   end
+  
   def new
     @restaurant = Restaurant.new
   end
+  
   def create
     @restaurant = Restaurant.new(restaurant_params)
     if @restaurant.save
@@ -19,6 +21,7 @@ class Admin::RestaurantsController < Admin::BaseController
       render :new
     end
   end
+  
   def update
     if @restaurant.update(restaurant_params)
       flash[:notice] = "restaurant was successfully updated"
@@ -28,22 +31,13 @@ class Admin::RestaurantsController < Admin::BaseController
       render :edit
     end
   end
+  
   def destroy
     @restaurant.destroy
     redirect_to admin_restaurants_path
     flash[:alert] = "restaurant was deleted"
   end
-  # def destroy
-  #   @restaurant.destroy
-  #   flash[:alert] = "restaurant was deleted"
-  #   redirect_to admin_restaurants_path
-  # end
-  # def show
-  #   # @restaurant = Restaurant.find(params[:id])
-  # end
-  # def edit
-  #
-  # end
+ 
   private
   def restaurant_params
     params.require(:restaurant).permit(:name, :opening_hours, :tel, :address, :description, :image)
