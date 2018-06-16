@@ -11,6 +11,7 @@ class Admin::CategoriesController < Admin::BaseController
       @category = Category.new
     end
   end
+  
   def create
     @category = Category.new(category_params)
     if @category.save
@@ -21,6 +22,7 @@ class Admin::CategoriesController < Admin::BaseController
       render :index
     end
   end
+  
   def update
   set_category
     if @category.update(category_params)
@@ -31,6 +33,7 @@ class Admin::CategoriesController < Admin::BaseController
       render :index
     end
   end
+  
   def destroy
     set_category
     @category.destroy
@@ -39,10 +42,10 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   private
-
   def category_params
     params.require(:category).permit(:name)
   end
+  
   def set_category
     @category = Category.find(params[:id])
   end
